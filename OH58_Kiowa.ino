@@ -12,7 +12,7 @@ Preferences Settings;
 #define RW_MODE false
 #define RO_MODE true
 
-BleGamepad bleGamepad("OH58 Kiowa Collective", "Simulator", 100);
+BleGamepad bleGamepad("OH58 Kiowa Collective", "DrSimgear", 100);
 
 const char* ssid = "OH58 Kiowa Collective Update";
 const char* password = "";
@@ -214,7 +214,7 @@ void setupUSB() {
     USB.VID(0xEB58);
     USB.PID(0x1209);
     USB.productName("OH58 Kiowa Collective");
-    USB.manufacturerName("Simulator");
+    USB.manufacturerName("DrSimgear");
     Joystick.setThrottleRange(0, 65535);
     Joystick.begin(false);
     USB.begin();
@@ -392,7 +392,7 @@ bool checkADCConversion() {
         if (analogContinuousRead(&result, 0)) { 
         x = result[0].avg_read_raw;
         if (abs(x - previousAdcValue) > 2) { //hysterisys
-         int y = map(x, calibratedMin, calibratedMax, 65535, 0);
+         int y = map(x, calibratedMin+5, calibratedMax-10, 65535, 0);
          throttle = constrain(y, 0, 65535);
         }
         previousAdcValue = x;   
